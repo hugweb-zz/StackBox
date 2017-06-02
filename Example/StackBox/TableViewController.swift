@@ -21,7 +21,8 @@ class TableViewController: UITableViewController {
     
     var options = ["Vertical Classic", "Vertical Random", "Vertical SnapKit",
                    "Horizontal Classic", "Horizontal Random", "Horizontal SnapKit",
-                   "Horizontal Paginated Classic", "Horizontal Paginated Random", "Horizontal Paginated SnapKit"]
+                   "Horizontal Paginated Classic", "Horizontal Paginated Random", "Horizontal Paginated SnapKit",
+                   "Profile Screen"]
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -63,6 +64,8 @@ class TableViewController: UITableViewController {
             let vc = HorizontalSnapController()
             vc.stack.isPagingEnabled = true
             self.navigationController?.pushViewController(vc, animated: true)
+        case 9:
+            self.navigationController?.pushViewController(ProfileController(), animated: true)
         default:
             break
         }

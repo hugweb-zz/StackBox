@@ -20,6 +20,7 @@
 		D474C4C91EE188360073C21D /* VerticalClassicController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D474C4C21EE188360073C21D /* VerticalClassicController.swift */; };
 		D474C4CA1EE188360073C21D /* VerticalRandomController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D474C4C31EE188360073C21D /* VerticalRandomController.swift */; };
 		D474C4CB1EE188360073C21D /* VerticalSnapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D474C4C41EE188360073C21D /* VerticalSnapController.swift */; };
+		D474C4D11EE1AEED0073C21D /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D474C4D01EE1AEED0073C21D /* ProfileController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,7 @@
 		D474C4C21EE188360073C21D /* VerticalClassicController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerticalClassicController.swift; sourceTree = "<group>"; };
 		D474C4C31EE188360073C21D /* VerticalRandomController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerticalRandomController.swift; sourceTree = "<group>"; };
 		D474C4C41EE188360073C21D /* VerticalSnapController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerticalSnapController.swift; sourceTree = "<group>"; };
+		D474C4D01EE1AEED0073C21D /* ProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
 		DFFD07CD4EEE4E6F7B9938D6 /* Pods_StackBox_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StackBox_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F35100B4E616C6AFC1C57C37 /* Pods-StackBox_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StackBox_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StackBox_Example/Pods-StackBox_Example.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -183,6 +185,7 @@
 				D474C4C21EE188360073C21D /* VerticalClassicController.swift */,
 				D474C4C31EE188360073C21D /* VerticalRandomController.swift */,
 				D474C4C41EE188360073C21D /* VerticalSnapController.swift */,
+				D474C4D01EE1AEED0073C21D /* ProfileController.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -240,11 +243,13 @@
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = P962UHZAJH;
 						LastSwiftMigration = 0820;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 					};
 					607FACE41AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = P962UHZAJH;
 						LastSwiftMigration = 0820;
 						TestTargetID = 607FACCF1AFB9204008FA782;
 					};
@@ -347,6 +352,7 @@
 				D474C4C51EE188360073C21D /* HorizontalClassicController.swift in Sources */,
 				D474C4CA1EE188360073C21D /* VerticalRandomController.swift in Sources */,
 				D474C4C81EE188360073C21D /* TableViewController.swift in Sources */,
+				D474C4D11EE1AEED0073C21D /* ProfileController.swift in Sources */,
 				D474C4C91EE188360073C21D /* VerticalClassicController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				D474C4CB1EE188360073C21D /* VerticalSnapController.swift in Sources */,
@@ -483,12 +489,14 @@
 			baseConfigurationReference = F35100B4E616C6AFC1C57C37 /* Pods-StackBox_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = P962UHZAJH;
 				INFOPLIST_FILE = StackBox/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
@@ -499,7 +507,8 @@
 			baseConfigurationReference = 519E81F90D94725D6BCE8C11 /* Pods-StackBox_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = P962UHZAJH;
 				INFOPLIST_FILE = StackBox/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
@@ -513,6 +522,7 @@
 		607FACF31AFB9204008FA782 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				DEVELOPMENT_TEAM = P962UHZAJH;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -532,6 +542,7 @@
 		607FACF41AFB9204008FA782 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				DEVELOPMENT_TEAM = P962UHZAJH;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",

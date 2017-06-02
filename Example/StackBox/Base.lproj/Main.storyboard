@@ -4,30 +4,10 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Vertical Random Controller-->
-        <scene sceneID="tne-QT-ifu">
-            <objects>
-                <viewController id="BYZ-38-t0r" customClass="VerticalRandomController" customModule="PopStackView" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="nVz-Bn-ohD"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-646" y="-636"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="EmU-e8-e7Y">
             <objects>
@@ -44,29 +24,10 @@
             </objects>
             <point key="canvasLocation" x="-2047" y="-225"/>
         </scene>
-        <!--Vertical Classic Controller-->
-        <scene sceneID="zkW-Fc-MDk">
-            <objects>
-                <viewController id="PJ3-B6-Pwd" customClass="VerticalClassicController" customModule="PopStackView" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="a2u-6S-kCx"/>
-                        <viewControllerLayoutGuide type="bottom" id="nUi-hy-Ewj"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="kha-re-Bx4">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="44v-dr-Uyj"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="fUa-Fk-Woc" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="10" y="-637"/>
-        </scene>
         <!--Table View Controller-->
         <scene sceneID="91E-Z8-Cz0">
             <objects>
-                <tableViewController id="S88-gu-9vJ" customClass="TableViewController" customModule="PopStackView" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="S88-gu-9vJ" customClass="TableViewController" customModule="StackBox_Example" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="5x7-mq-Qc1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -91,82 +52,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jJV-1e-B0H" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1385" y="-225"/>
-        </scene>
-        <!--Vertical Snap Controller-->
-        <scene sceneID="2OI-v2-Pk3">
-            <objects>
-                <viewController id="504-dG-r1x" customClass="VerticalSnapController" customModule="PopStackView" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="bv0-Hh-qGc"/>
-                        <viewControllerLayoutGuide type="bottom" id="U2i-IV-jhQ"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="5BO-zq-ZYA">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="Vlw-Uv-C00"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="rGa-DO-qnb" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="697" y="-638"/>
-        </scene>
-        <!--Horizontal Random Controller-->
-        <scene sceneID="NKZ-j9-pE6">
-            <objects>
-                <viewController id="g5o-fm-GsT" customClass="HorizontalRandomController" customModule="PopStackView" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="lLK-V7-MpR"/>
-                        <viewControllerLayoutGuide type="bottom" id="hZl-ds-wmT"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="6pl-Vt-Uwf">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="Jjm-bB-nUK"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="b7e-08-wSz" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-646" y="145"/>
-        </scene>
-        <!--Horizontal Classic Controller-->
-        <scene sceneID="hLB-rc-df8">
-            <objects>
-                <viewController id="Pe1-2h-mMS" customClass="HorizontalClassicController" customModule="PopStackView" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="lvR-ga-Glx"/>
-                        <viewControllerLayoutGuide type="bottom" id="99q-Wn-AHZ"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Xkt-oM-ymM">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="3X7-kF-of1"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="sCE-z7-fzi" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="10" y="145"/>
-        </scene>
-        <!--Horizontal Snap Controller-->
-        <scene sceneID="7oW-tF-JXU">
-            <objects>
-                <viewController id="XqQ-DA-286" customClass="HorizontalSnapController" customModule="PopStackView" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="oTG-0H-tjm"/>
-                        <viewControllerLayoutGuide type="bottom" id="qqB-8A-SSq"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="s3w-bk-Igh">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="HXa-eZ-li4"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="M3m-La-rZI" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="697" y="144"/>
         </scene>
     </scenes>
 </document>
