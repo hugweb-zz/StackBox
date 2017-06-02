@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'StackBox_Example' do
+  pod 'StackBox', :path => '../'
+
+  target 'StackBox_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
