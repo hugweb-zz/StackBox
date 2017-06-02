@@ -1,7 +1,9 @@
 PODS:
+  - SnapKit (3.2.0)
   - StackBox (0.1.0)
 
 DEPENDENCIES:
+  - SnapKit
   - StackBox (from `../`)
 
 EXTERNAL SOURCES:
@@ -9,8 +11,9 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  StackBox: 5326701b603da4e0fef8353831a251a80f451b05
+  SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
+  StackBox: 5c0cf575cfffa0922795d64252666d5a6d20dc73
 
-PODFILE CHECKSUM: 89b11d5e012c7a17d3ddae11a45c1e14f92b2a01
+PODFILE CHECKSUM: 53eaed9a442b6a4e0b2aaf608d55217907e2abe9
 
 COCOAPODS: 1.2.1
