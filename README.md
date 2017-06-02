@@ -1,4 +1,5 @@
 # StackBox
+StackBox is a scrollable container where you can easily insert and remove boxes
 
 [![CI Status](http://img.shields.io/travis/hugweb/StackBox.svg?style=flat)](https://travis-ci.org/hugweb/StackBox)
 [![Version](https://img.shields.io/cocoapods/v/StackBox.svg?style=flat)](http://cocoapods.org/pods/StackBox)
