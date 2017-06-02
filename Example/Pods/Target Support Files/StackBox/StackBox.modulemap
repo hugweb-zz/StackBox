@@ -1,0 +1,6 @@
+framework module StackBox {
+  umbrella header "StackBox-umbrella.h"
+
+  export *
+  module * { export * }
+}

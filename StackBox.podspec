@@ -9,20 +9,19 @@
 Pod::Spec.new do |s|
   s.name             = 'StackBox'
   s.version          = '0.1.0'
-  s.summary          = 'A short description of StackBox.'
-
-# This description is used to generate tags and improve search results.
-#   * Think: What does it do? Why did you write it? What is the focus?
-#   * Try to keep it short, snappy and to the point.
-#   * Write the description between the DESC delimiters below.
-#   * Finally, don't worry about the indent, CocoaPods strips it!
+  s.summary          = 'StackBox is a scrollable container where you can easily insert and remove boxes
+.'
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+StackBox is dynamic so you don't have to worry about the contentSize. Sub-boxes are
+manage by a UIStackView.
+
+StackBoxBox is the container object use by the StackBox to render stacks
+Each box contains the StackBoxView create initialy by the you
+Create your own StackBoxView by setting a view, his offset and alignement
                        DESC
 
   s.homepage         = 'https://github.com/hugweb/StackBox'
-  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'hugweb' => 'hugweb@gmail.com' }
   s.source           = { :git => 'https://github.com/hugweb/StackBox.git', :tag => s.version.to_s }

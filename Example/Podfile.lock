@@ -1,0 +1,16 @@
+PODS:
+  - StackBox (0.1.0)
+
+DEPENDENCIES:
+  - StackBox (from `../`)
+
+EXTERNAL SOURCES:
+  StackBox:
+    :path: ../
+
+SPEC CHECKSUMS:
+  StackBox: 5326701b603da4e0fef8353831a251a80f451b05
+
+PODFILE CHECKSUM: 89b11d5e012c7a17d3ddae11a45c1e14f92b2a01
+
+COCOAPODS: 1.2.1
