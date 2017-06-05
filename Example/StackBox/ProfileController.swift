@@ -92,7 +92,7 @@ class ProfileController: UIViewController {
             option.layer.cornerRadius = 20
             option.snp.makeConstraints { (make) in
                 make.width.equalTo(contentWidth)
-                make.height.equalTo(40)
+                make.height.equalTo(40).priority(999)
             }
             content.addArrangedSubview(option)
             self.options.append(option)

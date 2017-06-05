@@ -13,6 +13,7 @@
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
+		D467E57E1EE56A2E009D476F /* VerticalSpecificIndexController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D467E57D1EE56A2E009D476F /* VerticalSpecificIndexController.swift */; };
 		D474C4C51EE188360073C21D /* HorizontalClassicController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D474C4BE1EE188360073C21D /* HorizontalClassicController.swift */; };
 		D474C4C61EE188360073C21D /* HorizontalRandomController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D474C4BF1EE188360073C21D /* HorizontalRandomController.swift */; };
 		D474C4C71EE188360073C21D /* HorizontalSnapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D474C4C01EE188360073C21D /* HorizontalSnapController.swift */; };
@@ -48,6 +49,7 @@
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		AE53902D53BAC09757CE01C5 /* StackBox.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = StackBox.podspec; path = ../StackBox.podspec; sourceTree = "<group>"; };
 		B00FA1EDF013CA8A113D126F /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		D467E57D1EE56A2E009D476F /* VerticalSpecificIndexController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerticalSpecificIndexController.swift; sourceTree = "<group>"; };
 		D474C4BE1EE188360073C21D /* HorizontalClassicController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HorizontalClassicController.swift; sourceTree = "<group>"; };
 		D474C4BF1EE188360073C21D /* HorizontalRandomController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HorizontalRandomController.swift; sourceTree = "<group>"; };
 		D474C4C01EE188360073C21D /* HorizontalSnapController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HorizontalSnapController.swift; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 				D474C4C21EE188360073C21D /* VerticalClassicController.swift */,
 				D474C4C31EE188360073C21D /* VerticalRandomController.swift */,
 				D474C4C41EE188360073C21D /* VerticalSnapController.swift */,
+				D467E57D1EE56A2E009D476F /* VerticalSpecificIndexController.swift */,
 				D474C4D01EE1AEED0073C21D /* ProfileController.swift */,
 			);
 			name = ViewController;
@@ -349,6 +352,7 @@
 			files = (
 				D474C4C61EE188360073C21D /* HorizontalRandomController.swift in Sources */,
 				D474C4C71EE188360073C21D /* HorizontalSnapController.swift in Sources */,
+				D467E57E1EE56A2E009D476F /* VerticalSpecificIndexController.swift in Sources */,
 				D474C4C51EE188360073C21D /* HorizontalClassicController.swift in Sources */,
 				D474C4CA1EE188360073C21D /* VerticalRandomController.swift in Sources */,
 				D474C4C81EE188360073C21D /* TableViewController.swift in Sources */,

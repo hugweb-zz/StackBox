@@ -34,34 +34,34 @@ class VerticalSnapController: UIViewController {
         views = []
         
         let header = UIView()
-        header.backgroundColor = UIColor.yellow
+        header.backgroundColor = UIColor.random
         header.snp.makeConstraints { (make) in
             make.width.equalTo(UIScreen.main.bounds.width / 2)
             make.height.equalTo(40)
         }
         let footer = UIView()
-        footer.backgroundColor = UIColor.purple
+        footer.backgroundColor = UIColor.random
         footer.snp.makeConstraints { (make) in
             make.width.equalTo(UIScreen.main.bounds.width)
             make.height.equalTo(100)
         }
         
         let topContent = UIView()
-        topContent.backgroundColor = UIColor.blue
+        topContent.backgroundColor = UIColor.random
         topContent.snp.makeConstraints { (make) in
             make.width.equalTo(UIScreen.main.bounds.width / 3)
             make.height.equalTo(150)
         }
         
         let bottomContent = UIView()
-        bottomContent.backgroundColor = UIColor.brown
+        bottomContent.backgroundColor = UIColor.random
         bottomContent.snp.makeConstraints { (make) in
             make.width.equalTo(UIScreen.main.bounds.width / 1.2)
             make.height.equalTo(50)
         }
         
         let extraContent = UIView()
-        extraContent.backgroundColor = UIColor.orange
+        extraContent.backgroundColor = UIColor.random
         extraContent.snp.makeConstraints { (make) in
             make.width.equalTo(UIScreen.main.bounds.width / 4)
             make.height.equalTo(50)

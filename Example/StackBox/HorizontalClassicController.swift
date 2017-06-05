@@ -34,13 +34,13 @@ class HorizontalClassicController: UIViewController {
         views = []
         
         let header = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 100))
-        header.backgroundColor = UIColor.blue
+        header.backgroundColor = UIColor.random
         let footer = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 100))
-        footer.backgroundColor = UIColor.green
+        footer.backgroundColor = UIColor.random
         let topContent = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 300))
-        topContent.backgroundColor = UIColor.orange
+        topContent.backgroundColor = UIColor.random
         let bottomContent = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 600))
-        bottomContent.backgroundColor = UIColor.cyan
+        bottomContent.backgroundColor = UIColor.random
         
         var items = [StackBoxView(view: header),
                      StackBoxView(view: topContent),

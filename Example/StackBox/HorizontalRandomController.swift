@@ -29,7 +29,7 @@ class HorizontalRandomController: UIViewController {
     func generateLabel() -> UILabel {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.backgroundColor = UIColor.gray
+        label.backgroundColor = UIColor.random
         label.numberOfLines = 0
         label.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed efficitur augue nisi, ut placerat eros volutpat blandit. Morbi id tortor ac quam pretium egestas id eu nulla."
         return label

@@ -17,12 +17,21 @@ extension Array {
     }
 }
 
+extension UIColor {
+    static var random: UIColor {
+        return UIColor(red: CGFloat(arc4random()) / CGFloat(UInt32.max),
+                       green: CGFloat(arc4random()) / CGFloat(UInt32.max),
+                       blue: CGFloat(arc4random()) / CGFloat(UInt32.max),
+                       alpha: 1.0)
+    }
+}
+
 class TableViewController: UITableViewController {
     
     var options = ["Vertical Classic", "Vertical Random", "Vertical SnapKit",
                    "Horizontal Classic", "Horizontal Random", "Horizontal SnapKit",
                    "Horizontal Paginated Classic", "Horizontal Paginated Random", "Horizontal Paginated SnapKit",
-                   "Profile Screen"]
+                   "Profile Screen", "Specific Index"]
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -66,6 +75,8 @@ class TableViewController: UITableViewController {
             self.navigationController?.pushViewController(vc, animated: true)
         case 9:
             self.navigationController?.pushViewController(ProfileController(), animated: true)
+        case 10:
+            self.navigationController?.pushViewController(VerticalSpecificIndexController(), animated: true)
         default:
             break
         }
