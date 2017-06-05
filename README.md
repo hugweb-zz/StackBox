@@ -12,6 +12,9 @@ Create your own StackBoxView by setting a view, his offset and alignement.
 [![License](https://img.shields.io/cocoapods/l/StackBox.svg?style=flat)](http://cocoapods.org/pods/StackBox)
 [![Platform](https://img.shields.io/cocoapods/p/StackBox.svg?style=flat)](http://cocoapods.org/pods/StackBox)
 
+## Demo
+[![StackBox Profile](https://github.com/hugweb/StackBox/blob/master/Example/Gif/profile.gif)]
+
 ## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.

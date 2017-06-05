@@ -14,7 +14,7 @@ import UIKit
    manage by a UIStackView
  */
 
-class StackBox: UIScrollView {
+public class StackBox: UIScrollView {
     
     // MARK: Public var
     public var animated = true
@@ -57,7 +57,7 @@ class StackBox: UIScrollView {
         initialize()
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         initialize()
     }
@@ -118,7 +118,7 @@ class StackBox: UIScrollView {
     
     // MARK: Update StackView
     private func update(boxes: [StackBoxBox]) {
-        boxes.forEach { (box) in contain(view: box.view.item) ? removeBox(box: box) : addBox(box: box) }
+        boxes.forEach { (box) in contain(view: box.view.item) ? removeBox(box: box) : addBox(box: box, atIndex: self.boxes.index(of: box) ?? 0) }
     }
     
     private func contain(view: UIView) -> Bool {
@@ -128,16 +128,16 @@ class StackBox: UIScrollView {
     }
     
     // MARK: Private items management
-    private func addBox(box: StackBoxBox, separator: UIView? = nil) {
+    private func addBox(box: StackBoxBox, atIndex: Int = 0) {
         let b = box.attachView(axis: axis)
         b.isHidden = animated ? true : false
-        stackView.addArrangedSubview(box.attachView(axis: axis))
+        stackView.insertArrangedSubview(box.attachView(axis: axis), at: atIndex == 0 ? stackView.arrangedSubviews.count : atIndex)
         UIView.animate(withDuration: 0.3) {
             b.isHidden = false
         }
     }
     
-    private func removeBox(box: StackBoxBox, separator: UIView? = nil) {
+    private func removeBox(box: StackBoxBox) {
         box.isHidden = animated ? false : true
         UIView.animate(withDuration: 0.3, animations: {
             box.isHidden = true
@@ -148,8 +148,8 @@ class StackBox: UIScrollView {
     }
     
     // MARK: Public stack management
-    public func pop(views: [StackBoxView]) {
-        views.forEach { (view) in boxes.append(StackBoxBox(view: view)) }
+    public func pop(views: [StackBoxView], atIndex: Int = 0) {
+        views.forEach { (view) in boxes.insert(StackBoxBox(view: view), at: atIndex == 0 ? boxes.count : atIndex)}
     }
     
     public func delete(views: [StackBoxView]) {
@@ -165,7 +165,7 @@ class StackBox: UIScrollView {
  Create your own StackBoxView by setting his view and offset as you please
  */
 
-public enum HWStackBoxViewAlignment {
+public enum StackBoxAlignment {
     case leading
     case center
     case trailing
@@ -175,10 +175,10 @@ public struct StackBoxView: Hashable {
     
     var item: UIView
     var offset: CGFloat = 0.0
-    var alignment: HWStackBoxViewAlignment = .leading
+    var alignment: StackBoxAlignment = .leading
     fileprivate var activeConstraints: [NSLayoutConstraint] = []
     
-    init(view: UIView, alignment: HWStackBoxViewAlignment = .leading, offset: CGFloat = 0.0) {
+    public init(view: UIView, alignment: StackBoxAlignment = .leading, offset: CGFloat = 0.0) {
         self.item = view
         self.alignment = alignment
         self.offset = offset
@@ -200,7 +200,7 @@ public struct StackBoxView: Hashable {
         return StackBoxView(view: item, offset: offset)
     }
     
-    private func alignment(alignment: HWStackBoxViewAlignment) -> StackBoxView {
+    private func alignment(alignment: StackBoxAlignment) -> StackBoxView {
         return StackBoxView(view: item, alignment: alignment, offset: offset)
     }
 }
@@ -238,7 +238,7 @@ private class StackBoxBox: UIView {
     
     private func setupConstraints() {
         boxConstraints()
-        subviewConstraints()
+        viewConstraints()
     }
     
     private func boxConstraints() {
@@ -263,7 +263,7 @@ private class StackBoxBox: UIView {
         }
     }
     
-    private func subviewConstraints() {
+    private func viewConstraints() {
         if view.item.frame.size.width > 0 && view.item.frame.size.height > 0 {
             view.activeConstraints.append(view.item.widthAnchor.constraint(equalToConstant: view.item.frame.size.width))
             view.activeConstraints.append(view.item.heightAnchor.constraint(equalToConstant: view.item.frame.size.height))
