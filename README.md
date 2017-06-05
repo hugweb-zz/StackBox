@@ -13,9 +13,9 @@ Create your own StackBoxView by setting a view, his offset and alignement.
 [![Platform](https://img.shields.io/cocoapods/p/StackBox.svg?style=flat)](http://cocoapods.org/pods/StackBox)
 
 ## Demo
-[![StackBox Profile](https://github.com/hugweb/StackBox/blob/master/Example/Gif/profile.gif | width=100)]
-[![StackBox Random](https://github.com/hugweb/StackBox/blob/master/Example/Gif/random.gif | width=100)]
-[![StackBox SnapKit](https://github.com/hugweb/StackBox/blob/master/Example/Gif/snapkit.gif | width=100)]
+![StackBox Profile](https://github.com/hugweb/StackBox/blob/master/Example/Gif/profile.gif)
+![StackBox Random](https://github.com/hugweb/StackBox/blob/master/Example/Gif/random.gif)
+![StackBox SnapKit](https://github.com/hugweb/StackBox/blob/master/Example/Gif/snapkit.gif)
 
 ## Example
 
