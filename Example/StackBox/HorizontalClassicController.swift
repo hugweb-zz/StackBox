@@ -11,8 +11,8 @@ import StackBox
 
 class HorizontalClassicController: UIViewController {
     
-    let stack = StackBox()
-    var views: [StackBoxView] = []
+    let stack = StackBoxView()
+    var views: [StackBoxItem] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,10 +42,10 @@ class HorizontalClassicController: UIViewController {
         let bottomContent = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 600))
         bottomContent.backgroundColor = UIColor.random
         
-        var items = [StackBoxView(view: header),
-                     StackBoxView(view: topContent),
-                     StackBoxView(view: bottomContent),
-                     StackBoxView(view: footer)]
+        var items = [StackBoxItem(view: header),
+                     StackBoxItem(view: topContent),
+                     StackBoxItem(view: bottomContent),
+                     StackBoxItem(view: footer)]
         
         items.shuffle().forEach { views.append($0) }
         stack.pop(views: items)

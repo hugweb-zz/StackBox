@@ -12,8 +12,8 @@ import SnapKit
 
 class ProfileController: UIViewController {
     
-    let stack = StackBox()
-    var views: [StackBoxView] = []
+    let stack = StackBoxView()
+    var views: [StackBoxItem] = []
     var options: [UIButton] = []
     
     override func viewDidLoad() {
@@ -31,7 +31,7 @@ class ProfileController: UIViewController {
         }
     }
     
-    private func header() -> StackBoxView {
+    private func header() -> StackBoxItem {
         let header = UIView()
         header.backgroundColor = UIColor(hex: "00C9FF")
         header.snp.makeConstraints { (make) in
@@ -64,10 +64,10 @@ class ProfileController: UIViewController {
             make.top.equalTo(avatar.snp.bottom).offset(10)
         }
         
-        return StackBoxView(view: header)
+        return StackBoxItem(view: header)
     }
     
-    private func content() -> StackBoxView {
+    private func content() -> StackBoxItem {
         let contentWidth = UIScreen.main.bounds.width - 100
         let content = UIStackView()
         content.axis = .vertical
@@ -98,10 +98,10 @@ class ProfileController: UIViewController {
             self.options.append(option)
         }
         
-        return StackBoxView(view: content, alignment: .center, offset: 20)
+        return StackBoxItem(view: content, alignment: .center, offset: 20)
     }
     
-    private func footer() -> StackBoxView {
+    private func footer() -> StackBoxItem {
 
         let copyrights = UILabel()
         copyrights.text = "Copyright © 2017 by Anonymous.\nYour Rights Reserved 👍\n\n\n"
@@ -113,7 +113,7 @@ class ProfileController: UIViewController {
             make.width.equalTo(UIScreen.main.bounds.width)
         }
         
-        return StackBoxView(view: copyrights, offset: 30)
+        return StackBoxItem(view: copyrights, offset: 30)
     }
     
     private func animate() {

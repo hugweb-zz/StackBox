@@ -11,8 +11,8 @@ import StackBox
 
 class HorizontalRandomController: UIViewController {
     
-    let stack = StackBox()
-    var views: [StackBoxView] = []
+    let stack = StackBoxView()
+    var views: [StackBoxItem] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +38,7 @@ class HorizontalRandomController: UIViewController {
     func pop() {
         let random = Int(arc4random_uniform(2))
         let multiplier: CGFloat = [0, 20, 40, 60, 80, 100][Int(arc4random_uniform(UInt32(6)))]
-        let view = random == 0 ? StackBoxView(view: generateLabel(), alignment: .trailing) : StackBoxView(view: generateLabel(), offset: multiplier)
+        let view = random == 0 ? StackBoxItem(view: generateLabel(), alignment: .trailing) : StackBoxItem(view: generateLabel(), offset: multiplier)
         views.append(view)
         stack.pop(views: [view])
     }

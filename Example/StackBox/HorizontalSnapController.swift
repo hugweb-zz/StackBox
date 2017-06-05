@@ -12,8 +12,8 @@ import StackBox
 
 class HorizontalSnapController: UIViewController {
     
-    let stack = StackBox()
-    var views: [StackBoxView] = []
+    let stack = StackBoxView()
+    var views: [StackBoxItem] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,10 +67,10 @@ class HorizontalSnapController: UIViewController {
             make.height.equalTo(50)
         }
         
-        var items = [StackBoxView(view: header, alignment: .leading),
-                     StackBoxView(view: topContent),
-                     StackBoxView(view: bottomContent, alignment: .trailing),
-                     StackBoxView(view: footer)]
+        var items = [StackBoxItem(view: header, alignment: .leading),
+                     StackBoxItem(view: topContent),
+                     StackBoxItem(view: bottomContent, alignment: .trailing),
+                     StackBoxItem(view: footer)]
         
         items.shuffle().forEach { views.append($0) }
         stack.pop(views: items)

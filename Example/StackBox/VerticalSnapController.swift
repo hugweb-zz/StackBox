@@ -12,8 +12,8 @@ import StackBox
 
 class VerticalSnapController: UIViewController {
     
-    let stack = StackBox()
-    var views: [StackBoxView] = []
+    let stack = StackBoxView()
+    var views: [StackBoxItem] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,11 +67,11 @@ class VerticalSnapController: UIViewController {
             make.height.equalTo(50)
         }
         
-        var items = [StackBoxView(view: header, alignment: .leading),
-                     StackBoxView(view: topContent),
-                     StackBoxView(view: bottomContent, alignment: .trailing),
-                     StackBoxView(view: extraContent, alignment: .center),
-                     StackBoxView(view: footer)]
+        var items = [StackBoxItem(view: header, alignment: .leading),
+                     StackBoxItem(view: topContent),
+                     StackBoxItem(view: bottomContent, alignment: .trailing),
+                     StackBoxItem(view: extraContent, alignment: .center),
+                     StackBoxItem(view: footer)]
     
         items.shuffle().forEach { views.append($0) }
         stack.pop(views: items)

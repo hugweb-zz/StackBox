@@ -11,12 +11,12 @@ Pod::Spec.new do |s|
   s.version          = "0.1.0"
   s.summary          = "StackBox is a scrollable container where you can easily insert and remove boxes."
   s.description      = <<-DESC
-                        StackBox is dynamic so you don't have to worry about the contentSize. Sub-boxes are
+                        StackBoxView is dynamic so you don't have to worry about the contentSize. Sub-boxes are
                         manage by a UIStackView.
 
-                        StackBoxBox is the container object use by the StackBox to render stacks
-                        Each box contains the StackBoxView create initialy by the you
-                        Create your own StackBoxView by setting a view, his offset and alignement
+                        StackBoxContainer is the container object use by the StackBox to render stacks
+                        Each box contains the StackBoxItem create initialy by the you
+                        Create your own StackBoxItem by setting a view, his offset and alignement
                        DESC
   s.homepage         = 'https://github.com/hugweb/StackBox'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }

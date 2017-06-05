@@ -9,12 +9,12 @@
 import UIKit
 
 /* 
-   StackBox is a scrollable container where you can easily insert and remove subviews.
-   StackBox is dynamic so you don't have to worry about the contentSize. Subcontent is
+   StackBoxView is a scrollable container where you can easily insert and remove subviews.
+   StackBoxView is dynamic so you don't have to worry about the contentSize. Subcontent is
    manage by a UIStackView
  */
 
-open class StackBox: UIScrollView {
+public class StackBoxView: UIScrollView {
     
     // MARK: Public var
     public var animated = true
@@ -26,10 +26,10 @@ open class StackBox: UIScrollView {
     }
     
     // MARK: Private var
-    private var boxes: [StackBoxBox] = [] {
+    private var boxes: [StackBoxContainer] = [] {
         didSet {
-            let new = Set<StackBoxBox>(boxes)
-            let old = Set<StackBoxBox>(oldValue)
+            let new = Set<StackBoxContainer>(boxes)
+            let old = Set<StackBoxContainer>(oldValue)
             update(boxes: old.count > new.count ? Array(old.subtracting(new)) : Array(new.subtracting(old)))
         }
     }
@@ -121,7 +121,7 @@ open class StackBox: UIScrollView {
     }
     
     // MARK: Update StackView
-    private func update(boxes: [StackBoxBox]) {
+    private func update(boxes: [StackBoxContainer]) {
         boxes.forEach { (box) in contain(view: box.view.item) ? removeBox(box: box) : addBox(box: box, atIndex: self.boxes.index(of: box) ?? 0) }
     }
     
@@ -132,7 +132,7 @@ open class StackBox: UIScrollView {
     }
     
     // MARK: Private items management
-    private func addBox(box: StackBoxBox, atIndex: Int = 0) {
+    private func addBox(box: StackBoxContainer, atIndex: Int = 0) {
         let b = box.attachView(axis: axis)
         b.isHidden = animated ? true : false
         stackView.insertArrangedSubview(box.attachView(axis: axis), at: atIndex == 0 ? stackView.arrangedSubviews.count : atIndex)
@@ -141,7 +141,7 @@ open class StackBox: UIScrollView {
         }
     }
     
-    private func removeBox(box: StackBoxBox) {
+    private func removeBox(box: StackBoxContainer) {
         box.isHidden = animated ? false : true
         UIView.animate(withDuration: 0.3, animations: {
             box.isHidden = true
@@ -152,11 +152,11 @@ open class StackBox: UIScrollView {
     }
     
     // MARK: Public stack management
-    public func pop(views: [StackBoxView], atIndex: Int = 0) {
-        views.forEach { (view) in boxes.insert(StackBoxBox(view: view), at: atIndex == 0 ? boxes.count : atIndex)}
+    public func pop(views: [StackBoxItem], atIndex: Int = 0) {
+        views.forEach { (view) in boxes.insert(StackBoxContainer(view: view), at: atIndex == 0 ? boxes.count : atIndex)}
     }
     
-    public func delete(views: [StackBoxView]) {
+    public func delete(views: [StackBoxItem]) {
         views.forEach { (view) in if let index = boxes.index(where: { $0.view == view }) {
                 boxes.remove(at: index)
             }
@@ -165,24 +165,24 @@ open class StackBox: UIScrollView {
 }
 
 /*
- StackBoxView is encapsulate into a StackBoxBox
- Create your own StackBoxView by setting his view and offset as you please
+ StackBoxItem is encapsulate into a StackBoxContainer
+ Create your own StackBoxItem by setting his view and offset as you please
  */
 
-public enum StackBoxAlignment {
+public enum StackBoxItemAlignment {
     case leading
     case center
     case trailing
 }
 
-public struct StackBoxView: Hashable {
+public struct StackBoxItem: Hashable {
     
     var item: UIView
     var offset: CGFloat = 0.0
-    var alignment: StackBoxAlignment = .leading
+    var alignment: StackBoxItemAlignment = .leading
     fileprivate var activeConstraints: [NSLayoutConstraint] = []
     
-    public init(view: UIView, alignment: StackBoxAlignment = .leading, offset: CGFloat = 0.0) {
+    public init(view: UIView, alignment: StackBoxItemAlignment = .leading, offset: CGFloat = 0.0) {
         self.item = view
         self.alignment = alignment
         self.offset = offset
@@ -192,35 +192,35 @@ public struct StackBoxView: Hashable {
         return "\(item)\(offset)".hashValue
     }
     
-    public static func ==(lhs: StackBoxView, rhs: StackBoxView) -> Bool {
+    public static func ==(lhs: StackBoxItem, rhs: StackBoxItem) -> Bool {
         return lhs.hashValue == rhs.hashValue
     }
     
-    private func pop(view: UIView) -> StackBoxView {
-        return StackBoxView(view: view, offset: 0)
+    private func pop(view: UIView) -> StackBoxItem {
+        return StackBoxItem(view: view, offset: 0)
     }
     
-    private func offset(offset: CGFloat) -> StackBoxView {
-        return StackBoxView(view: item, offset: offset)
+    private func offset(offset: CGFloat) -> StackBoxItem {
+        return StackBoxItem(view: item, offset: offset)
     }
     
-    private func alignment(alignment: StackBoxAlignment) -> StackBoxView {
-        return StackBoxView(view: item, alignment: alignment, offset: offset)
+    private func alignment(alignment: StackBoxItemAlignment) -> StackBoxItem {
+        return StackBoxItem(view: item, alignment: alignment, offset: offset)
     }
 }
 
 /*
- StackBoxBox is the container object use by the StackBox to render stacks
- It contains the StackBoxView create initialy by the user
+ StackBoxContainer is the container object use by the StackBoxView to render stacks
+ It contains the StackBoxItem create initialy by the user
  */
 
-private class StackBoxBox: UIView {
+private class StackBoxContainer: UIView {
     
-    var view: StackBoxView
+    var view: StackBoxItem
     private var activeConstraints: [NSLayoutConstraint] = []
     private var axis: UILayoutConstraintAxis = .vertical
     
-    init(view: StackBoxView) {
+    init(view: StackBoxItem) {
         self.view = view
         super.init(frame: CGRect.zero)
     }
@@ -229,11 +229,11 @@ private class StackBoxBox: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    static func ==(lhs: StackBoxBox, rhs: StackBoxBox) -> Bool {
+    static func ==(lhs: StackBoxContainer, rhs: StackBoxContainer) -> Bool {
         return lhs.view.item.hashValue == rhs.view.item.hashValue
     }
     
-    func attachView(axis: UILayoutConstraintAxis) -> StackBoxBox {
+    func attachView(axis: UILayoutConstraintAxis) -> StackBoxContainer {
         self.clipsToBounds = true
         self.axis = axis
         addSubview(view.item)

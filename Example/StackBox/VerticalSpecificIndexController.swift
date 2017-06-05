@@ -11,8 +11,8 @@ import StackBox
 
 class VerticalSpecificIndexController: UIViewController {
     
-    let stack = StackBox()
-    var views: [StackBoxView] = []
+    let stack = StackBoxView()
+    var views: [StackBoxItem] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,9 +48,9 @@ class VerticalSpecificIndexController: UIViewController {
         stack.pop(views: [box], atIndex: index)
     }
     
-    private func generateView() -> StackBoxView {
+    private func generateView() -> StackBoxItem {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 40))
         view.backgroundColor = UIColor.random
-        return StackBoxView(view: view)
+        return StackBoxItem(view: view)
     }
 }
