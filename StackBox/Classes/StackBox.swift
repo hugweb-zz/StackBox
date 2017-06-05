@@ -14,7 +14,7 @@ import UIKit
    manage by a UIStackView
  */
 
-public class StackBox: UIScrollView {
+open class StackBox: UIScrollView {
     
     // MARK: Public var
     public var animated = true
@@ -95,7 +95,7 @@ public class StackBox: UIScrollView {
         addConstraint(trailingAnchor.constraint(equalTo: stackView.trailingAnchor))
     }
     
-    override public func didMoveToSuperview() {
+    override open func didMoveToSuperview() {
         super.didMoveToSuperview()
         pinToSuperview()
     }
