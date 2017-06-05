@@ -45,14 +45,18 @@ public class StackBox: UIScrollView {
     }()
     
     // MARK: Lifecycle
-    convenience init(axis: UILayoutConstraintAxis, animated: Bool) {
+    public convenience init() {
+        self.init(frame: CGRect.zero)
+    }
+
+    public convenience init(axis: UILayoutConstraintAxis, animated: Bool) {
         self.init()
         self.axis = axis
         self.animated = animated
         initialize()
     }
     
-    override init(frame: CGRect) {
+    public override init(frame: CGRect) {
         super.init(frame: frame)
         initialize()
     }
