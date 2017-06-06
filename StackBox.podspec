@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "StackBox"
-  s.version          = "0.1.0"
+  s.version          = "0.1.1"
   s.summary          = "StackBox is a scrollable container where you can easily insert and remove boxes."
   s.description      = <<-DESC
                         StackBoxView is dynamic so you don't have to worry about the contentSize. Sub-boxes are

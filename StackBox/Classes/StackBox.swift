@@ -234,7 +234,6 @@ private class StackBoxContainer: UIView {
     }
     
     func attachView(axis: UILayoutConstraintAxis) -> StackBoxContainer {
-        self.clipsToBounds = true
         self.axis = axis
         addSubview(view.item)
         return self
@@ -254,7 +253,7 @@ private class StackBoxContainer: UIView {
         if view.item.frame.size.height > 0 {
             activeConstraints.append(heightAnchor.constraint(equalToConstant: view.item.frame.size.height))
         } else {
-            if let heigthConstraint = view.item.hasConstraint(attribute: .height) {
+            if let heigthConstraint = view.item.hasConstraint(attribute: .height), heigthConstraint.constant > 0  {
                 activeConstraints.append(heightAnchor.constraint(equalToConstant: heigthConstraint.constant))
             } else {
                 debugPrint("No height was set for \(view) !!!!! View may not be visible !!!!!")
