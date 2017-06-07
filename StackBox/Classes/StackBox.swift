@@ -8,15 +8,16 @@
 
 import UIKit
 
-/* 
-   StackBoxView is a scrollable container where you can easily insert and remove subviews.
-   StackBoxView is dynamic so you don't have to worry about the contentSize. Subcontent is
-   manage by a UIStackView
+/*
+ StackBoxView is a scrollable container where you can easily insert and remove subviews.
+ StackBoxView is dynamic so you don't have to worry about the contentSize. Subcontent is
+ manage by a UIStackView
  */
 
 public class StackBoxView: UIScrollView {
     
     // MARK: Public var
+    public var duration: Double = 0.3
     public var animated = true
     public var axis: UILayoutConstraintAxis = .vertical {
         didSet {
@@ -28,9 +29,10 @@ public class StackBoxView: UIScrollView {
     // MARK: Private var
     private var boxes: [StackBoxContainer] = [] {
         didSet {
-            let new = Set<StackBoxContainer>(boxes)
-            let old = Set<StackBoxContainer>(oldValue)
-            update(boxes: old.count > new.count ? Array(old.subtracting(new)) : Array(new.subtracting(old)))
+            let new = boxes
+            let old = oldValue
+            let values = old.count > new.count ? old.filter { element in return !new.contains(element) } : new.filter { element in return !old.contains(element) }
+            update(boxes: values)
         }
     }
     private lazy var stackView: UIStackView = {
@@ -48,7 +50,7 @@ public class StackBoxView: UIScrollView {
     public convenience init() {
         self.init(frame: CGRect.zero)
     }
-
+    
     public convenience init(axis: UILayoutConstraintAxis, animated: Bool) {
         self.init()
         self.axis = axis
@@ -122,28 +124,51 @@ public class StackBoxView: UIScrollView {
     
     // MARK: Update StackView
     private func update(boxes: [StackBoxContainer]) {
-        boxes.forEach { (box) in contain(view: box.view.item) ? removeBox(box: box) : addBox(box: box, atIndex: self.boxes.index(of: box) ?? 0) }
+        if boxes.count > 1 {
+            var deletion: [StackBoxContainer] = []
+            var insertion: [StackBoxContainer] = []
+            boxes.forEach { (box) in contain(box: box) ? insertion.append(box) : deletion.append(box) }
+            removeBox(boxes: deletion)
+            addBox(boxes: insertion)
+        } else {
+            boxes.forEach { (box) in contain(box: box) ? addBox(boxes: [box], atIndex: self.boxes.index(of: box) ?? 0) : removeBox(boxes: [box]) }
+        }
     }
     
-    private func contain(view: UIView) -> Bool {
-        var exits = false
-        stackView.arrangedSubviews.forEach({ (v) in if v.subviews.contains(view) { exits = true } })
-        return exits
+    private func contain(box: StackBoxContainer) -> Bool {
+        return self.boxes.contains(box)
     }
     
     // MARK: Private items management
-    private func addBox(box: StackBoxContainer, atIndex: Int = 0) {
-        let b = box.attachView(axis: axis)
-        b.isHidden = animated ? true : false
-        stackView.insertArrangedSubview(box.attachView(axis: axis), at: atIndex == 0 ? stackView.arrangedSubviews.count : atIndex)
-        UIView.animate(withDuration: 0.3) {
-            b.isHidden = false
+    private func addBox(boxes: [StackBoxContainer], atIndex: Int = 0) {
+        let values = boxes.map { $0.attachView(axis: axis) }
+        values.forEach { (box) in
+            box.isHidden = true
+            stackView.insertArrangedSubview(box.attachView(axis: axis), at: atIndex == 0 ? stackView.arrangedSubviews.count : atIndex)
+            UIView.animate(withDuration: duration) {
+                box.isHidden = false
+            }
+        }
+    }
+    
+    private func removeBox(boxes: [StackBoxContainer]) {
+        //        UIView.animate(withDuration: duration, animations: {
+        //            boxes.forEach { (box) in
+        //                box.isHidden = true
+        //            }
+        //        }, completion: { (success) in
+        //            boxes.forEach { (box) in
+        //                self.stackView.removeArrangedSubview(box)
+        //                box.removeFromSuperview()
+        //            }
+        //        })
+        boxes.forEach { (box) in
+            removeBox(box: box)
         }
     }
     
     private func removeBox(box: StackBoxContainer) {
-        box.isHidden = animated ? false : true
-        UIView.animate(withDuration: 0.3, animations: {
+        UIView.animate(withDuration: duration, animations: {
             box.isHidden = true
         }, completion: { (success) in
             self.stackView.removeArrangedSubview(box)
@@ -153,12 +178,24 @@ public class StackBoxView: UIScrollView {
     
     // MARK: Public stack management
     public func pop(views: [StackBoxItem], atIndex: Int = 0) {
-        views.forEach { (view) in boxes.insert(StackBoxContainer(view: view), at: atIndex == 0 ? boxes.count : atIndex)}
+        if views.count > 1 {
+            boxes.insert(contentsOf: views.map { StackBoxContainer(view: $0) }, at: atIndex == 0 ? boxes.count : atIndex)
+        } else {
+            views.forEach { (view) in boxes.insert(StackBoxContainer(view: view), at: atIndex == 0 ? boxes.count : atIndex)}
+        }
+    }
+    
+    public func pop(view: StackBoxItem, atIndex: Int = 0) {
+        boxes.insert(StackBoxContainer(view: view), at: atIndex == 0 ? boxes.count : atIndex)
+    }
+    
+    public func deleteLast() {
+        boxes.remove(at: boxes.count - 1)
     }
     
     public func delete(views: [StackBoxItem]) {
         views.forEach { (view) in if let index = boxes.index(where: { $0.view == view }) {
-                boxes.remove(at: index)
+            boxes.remove(at: index)
             }
         }
     }
@@ -180,12 +217,21 @@ public struct StackBoxItem: Hashable {
     var item: UIView
     var offset: CGFloat = 0.0
     var alignment: StackBoxItemAlignment = .leading
+    var clipsToBounds: Bool = true
+    var backgroundColor: UIColor = UIColor.clear
+    
     fileprivate var activeConstraints: [NSLayoutConstraint] = []
     
-    public init(view: UIView, alignment: StackBoxItemAlignment = .leading, offset: CGFloat = 0.0) {
+    public init(view: UIView,
+                alignment: StackBoxItemAlignment = .leading,
+                offset: CGFloat = 0.0,
+                backgroundColor: UIColor = UIColor.clear,
+                clipsToBounds: Bool = true) {
         self.item = view
         self.alignment = alignment
         self.offset = offset
+        self.backgroundColor = backgroundColor
+        self.clipsToBounds = clipsToBounds
     }
     
     public var hashValue: Int {
@@ -194,18 +240,6 @@ public struct StackBoxItem: Hashable {
     
     public static func ==(lhs: StackBoxItem, rhs: StackBoxItem) -> Bool {
         return lhs.hashValue == rhs.hashValue
-    }
-    
-    private func pop(view: UIView) -> StackBoxItem {
-        return StackBoxItem(view: view, offset: 0)
-    }
-    
-    private func offset(offset: CGFloat) -> StackBoxItem {
-        return StackBoxItem(view: item, offset: offset)
-    }
-    
-    private func alignment(alignment: StackBoxItemAlignment) -> StackBoxItem {
-        return StackBoxItem(view: item, alignment: alignment, offset: offset)
     }
 }
 
@@ -234,7 +268,9 @@ private class StackBoxContainer: UIView {
     }
     
     func attachView(axis: UILayoutConstraintAxis) -> StackBoxContainer {
+        self.clipsToBounds = self.view.clipsToBounds
         self.axis = axis
+        self.backgroundColor = self.view.backgroundColor
         addSubview(view.item)
         return self
     }
@@ -251,10 +287,10 @@ private class StackBoxContainer: UIView {
             activeConstraints.append(widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width))
         }
         if view.item.frame.size.height > 0 {
-            activeConstraints.append(heightAnchor.constraint(equalToConstant: view.item.frame.size.height))
+            activeConstraints.append(heightAnchor.constraint(equalToConstant: view.item.frame.size.height + view.offset))
         } else {
             if let heigthConstraint = view.item.hasConstraint(attribute: .height), heigthConstraint.constant > 0  {
-                activeConstraints.append(heightAnchor.constraint(equalToConstant: heigthConstraint.constant))
+                activeConstraints.append(heightAnchor.constraint(equalToConstant: heigthConstraint.constant + view.offset))
             } else {
                 debugPrint("No height was set for \(view) !!!!! View may not be visible !!!!!")
             }
@@ -269,7 +305,7 @@ private class StackBoxContainer: UIView {
     private func viewConstraints() {
         if view.item.frame.size.width > 0 && view.item.frame.size.height > 0 {
             view.activeConstraints.append(view.item.widthAnchor.constraint(equalToConstant: view.item.frame.size.width))
-            view.activeConstraints.append(view.item.heightAnchor.constraint(equalToConstant: view.item.frame.size.height))
+            view.activeConstraints.append(view.item.heightAnchor.constraint(equalToConstant: view.item.frame.size.height + view.offset))
         } else {
             if let box = superview?.superview, view.item.hasConstraint(attribute: .width) == nil {
                 view.activeConstraints.append(view.item.widthAnchor.constraint(equalToConstant: box.frame.size.width))
