@@ -18,7 +18,6 @@ public class StackBoxView: UIScrollView {
     
     // MARK: Public var
     public var duration: Double = 0.3
-    public var animated = true
     public var axis: UILayoutConstraintAxis = .vertical {
         didSet {
             self.stackView.axis = self.axis
@@ -51,10 +50,9 @@ public class StackBoxView: UIScrollView {
         self.init(frame: CGRect.zero)
     }
     
-    public convenience init(axis: UILayoutConstraintAxis, animated: Bool) {
+    public convenience init(axis: UILayoutConstraintAxis) {
         self.init()
         self.axis = axis
-        self.animated = animated
         initialize()
     }
     
@@ -124,15 +122,11 @@ public class StackBoxView: UIScrollView {
     
     // MARK: Update StackView
     private func update(boxes: [StackBoxContainer]) {
-        if boxes.count > 1 {
-            var deletion: [StackBoxContainer] = []
-            var insertion: [StackBoxContainer] = []
-            boxes.forEach { (box) in contain(box: box) ? insertion.append(box) : deletion.append(box) }
-            removeBox(boxes: deletion)
-            addBox(boxes: insertion)
-        } else {
-            boxes.forEach { (box) in contain(box: box) ? addBox(boxes: [box], atIndex: self.boxes.index(of: box) ?? 0) : removeBox(boxes: [box]) }
-        }
+        var deletion: [StackBoxContainer] = []
+        var insertion: [StackBoxContainer] = []
+        boxes.forEach { (box) in contain(box: box) ? insertion.append(box) : deletion.append(box) }
+        removeBox(boxes: deletion)
+        addBox(boxes: insertion)
     }
     
     private func contain(box: StackBoxContainer) -> Bool {
@@ -141,34 +135,38 @@ public class StackBoxView: UIScrollView {
     
     // MARK: Private items management
     private func addBox(boxes: [StackBoxContainer], atIndex: Int = 0) {
-        let values = boxes.map { $0.attachView(axis: axis) }
-        values.forEach { (box) in
-            box.isHidden = true
-            stackView.insertArrangedSubview(box.attachView(axis: axis), at: atIndex == 0 ? stackView.arrangedSubviews.count : atIndex)
-            UIView.animate(withDuration: duration) {
-                box.isHidden = false
-            }
+        var delay = -duration
+        boxes.forEach { (box) in
+            delay += box.animated ? duration : 0.0
+            DispatchQueue.main.asyncAfter(deadline: .now() + delay, execute: {
+                self.addBox(box: box, atIndex: atIndex)
+            })
         }
     }
     
     private func removeBox(boxes: [StackBoxContainer]) {
-        //        UIView.animate(withDuration: duration, animations: {
-        //            boxes.forEach { (box) in
-        //                box.isHidden = true
-        //            }
-        //        }, completion: { (success) in
-        //            boxes.forEach { (box) in
-        //                self.stackView.removeArrangedSubview(box)
-        //                box.removeFromSuperview()
-        //            }
-        //        })
+        var delay = -duration
         boxes.forEach { (box) in
-            removeBox(box: box)
+            delay += box.animated ? duration : 0.0
+            DispatchQueue.main.asyncAfter(deadline: .now() + delay, execute: {
+                self.removeBox(box: box)
+            })
+        }
+    }
+    
+    private func addBox(box: StackBoxContainer, atIndex: Int = 0) {
+        let b = box.attachView(axis: axis)
+        b.isHidden = box.animated ? true : false
+        stackView.insertArrangedSubview(box.attachView(axis: axis), at: atIndex == 0 ? stackView.arrangedSubviews.count : atIndex)
+        if box.animated {
+            UIView.animate(withDuration: duration, animations: {
+                b.isHidden = false
+            }, completion: nil)
         }
     }
     
     private func removeBox(box: StackBoxContainer) {
-        UIView.animate(withDuration: duration, animations: {
+        UIView.animate(withDuration: box.animated ? duration : 0.0, animations: {
             box.isHidden = true
         }, completion: { (success) in
             self.stackView.removeArrangedSubview(box)
@@ -177,25 +175,31 @@ public class StackBoxView: UIScrollView {
     }
     
     // MARK: Public stack management
-    public func pop(views: [StackBoxItem], atIndex: Int = 0) {
+    public func pop(views: [StackBoxItem], atIndex: Int = 0, animated: Bool = true) {
         if views.count > 1 {
-            boxes.insert(contentsOf: views.map { StackBoxContainer(view: $0) }, at: atIndex == 0 ? boxes.count : atIndex)
+            boxes.insert(contentsOf: views.map { StackBoxContainer(view: $0, animated: animated) }, at: atIndex == 0 ? boxes.count : atIndex)
         } else {
-            views.forEach { (view) in boxes.insert(StackBoxContainer(view: view), at: atIndex == 0 ? boxes.count : atIndex)}
+            views.forEach { (view) in boxes.insert(StackBoxContainer(view: view, animated: animated), at: atIndex == 0 ? boxes.count : atIndex)}
         }
     }
     
-    public func pop(view: StackBoxItem, atIndex: Int = 0) {
-        boxes.insert(StackBoxContainer(view: view), at: atIndex == 0 ? boxes.count : atIndex)
+    public func pop(view: StackBoxItem, atIndex: Int = 0, animated: Bool = true) {
+        boxes.insert(StackBoxContainer(view: view, animated: animated), at: atIndex == 0 ? boxes.count : atIndex)
     }
     
-    public func deleteLast() {
-        boxes.remove(at: boxes.count - 1)
-    }
-    
-    public func delete(views: [StackBoxItem]) {
-        views.forEach { (view) in if let index = boxes.index(where: { $0.view == view }) {
+    public func deleteLast(animated: Bool = true) {
+        let index = boxes.count - 1
+        if index > 0 {
+            boxes[index].animated = animated
             boxes.remove(at: index)
+        }
+    }
+    
+    public func delete(views: [StackBoxItem], animated: Bool = true) {
+        views.forEach { (view) in
+            if let index = boxes.index(where: { $0.view == view }) {
+                boxes[index].animated = animated
+                boxes.remove(at: index)
             }
         }
     }
@@ -251,11 +255,13 @@ public struct StackBoxItem: Hashable {
 private class StackBoxContainer: UIView {
     
     var view: StackBoxItem
+    var animated: Bool
     private var activeConstraints: [NSLayoutConstraint] = []
     private var axis: UILayoutConstraintAxis = .vertical
     
-    init(view: StackBoxItem) {
+    init(view: StackBoxItem, animated: Bool) {
         self.view = view
+        self.animated = animated
         super.init(frame: CGRect.zero)
     }
     
